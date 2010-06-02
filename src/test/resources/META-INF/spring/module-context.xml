@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-2.1.xsd">
+
+	<job id="job" xmlns="http://www.springframework.org/schema/batch">
+		<step id="step-master">
+			<partition handler="partitionHandler" step="step"
+				partitioner="partitioner" />
+		</step>
+	</job>
+
+	<bean id="partitionHandler"
+		class="org.springframework.batch.core.partition.gemfire.GemfirePartitionHandler">
+		<property name="region" ref="region" />
+		<property name="gridSize" value="2" />
+		<property name="step" ref="step" />
+	</bean>
+
+	<bean id="partitioner"
+		class="org.springframework.batch.core.partition.support.SimplePartitioner" />
+
+	<bean id="region"
+		class="org.springframework.batch.core.partition.gemfire.RegionFactoryBean">
+		<property name="name" value="step" />
+	</bean>
+
+	<bean id="step"
+		class="org.springframework.batch.core.step.item.SimpleStepFactoryBean"
+		scope="remote">
+		<property name="itemReader">
+			<bean
+				class="org.springframework.batch.core.partition.gemfire.ExampleItemReader" />
+		</property>
+		<property name="itemWriter">
+			<bean
+				class="org.springframework.batch.core.partition.gemfire.ExampleItemWriter" />
+		</property>
+		<property name="transactionManager" ref="transactionManager"/>
+		<property name="jobRepository" ref="jobRepository"/>
+	</bean>
+
+</beans>
