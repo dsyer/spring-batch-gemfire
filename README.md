@@ -33,4 +33,9 @@ and then you will be able to use all the features provided by this project.
 		</step>
 	</job>
 	<bean id="partitionHandler"
-		class="org.springframework.batch.core.partition.gemfire.GemfirePartitionHandler" />
+		class="org.springframework.batch.core.partition.gemfire.GemfirePartitionHandler">
+		<property name="region" ref="region" />
+		<property name="gridSize" value="2" />
+		<property name="step" ref="step" />
+	</bean>
+		

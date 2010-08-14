@@ -1,4 +1,4 @@
-#Sat Aug 14 13:22:42 BST 2010
+#Sat Aug 14 13:37:52 BST 2010
 //com.springsource.sts.config.flow.coordinates\:http\://www.springframework.org/schema/batch\:/spring-batch-gemfire/src/test/resources/META-INF/spring/execution-context.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<graph/>
 //com.springsource.sts.config.flow.coordinates\:http\://www.springframework.org/schema/batch\:/spring-batch-gemfire/src/test/resources/META-INF/spring/module-context.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<graph>\r\n<element type\="job">\r\n<structure end\="823" endstart\="817" start\="622" startend\="688"/>\r\n<bounds height\="118" width\="112" x\="15" y\="17"/>\r\n</element>\r\n</graph>
 //com.springsource.sts.config.flow.coordinates\:http\://www.springframework.org/schema/batch\:/spring-batch-gridgain/src/main/resources/META-INF/spring/execution-context.xml=<?xml version\="1.0" encoding\="UTF-8"?>\n<graph/>
