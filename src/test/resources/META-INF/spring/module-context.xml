@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util" 
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
 		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-2.1.xsd">
 
 	<job id="job" xmlns="http://www.springframework.org/schema/batch">
@@ -21,9 +23,14 @@
 	<bean id="partitioner"
 		class="org.springframework.batch.core.partition.support.SimplePartitioner" />
 
-	<bean id="region"
-		class="org.springframework.batch.core.partition.gemfire.RegionFactoryBean">
+	<bean id="region" class="org.springframework.data.gemfire.RegionFactoryBean">
 		<property name="name" value="step" />
+		<property name="dataPolicy">
+			<util:constant static-field="com.gemstone.gemfire.cache.DataPolicy.PARTITION"/>
+		</property>
+		<property name="cache">
+			<bean id="cache" class="org.springframework.data.gemfire.CacheFactoryBean" />
+		</property>
 	</bean>
 
 	<bean id="step"
@@ -37,8 +44,8 @@
 			<bean
 				class="org.springframework.batch.core.partition.gemfire.ExampleItemWriter" />
 		</property>
-		<property name="transactionManager" ref="transactionManager"/>
-		<property name="jobRepository" ref="jobRepository"/>
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="jobRepository" ref="jobRepository" />
 	</bean>
 
 </beans>
