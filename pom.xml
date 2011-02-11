@@ -9,32 +9,36 @@
 	<url>http://www.github.com/dsyer</url>
 	<profiles>
 		<profile>
-			<id>legacy-build</id>
+			<id>bootstrap</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
 			<repositories>
 				<repository>
-					<id>gemfire-release-repo</id>
-					<name>GemFire Release Repository</name>
-					<url>http://dist.gemstone.com/maven/release/</url>
-				</repository>
-				<repository>
-					<id>repository.springframework.maven.milestone</id>
-					<name>Spring Framework Maven Milestone Repository</name>
-					<url>http://maven.springframework.org/milestone</url>
+					<id>org.springframework.release</id>
+					<name>Spring Repository - Releases</name>
+					<url>http://maven.springframework.org/release/</url>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
 				</repository>
 			</repositories>
 		</profile>
 	</profiles>
 	<properties>
 		<maven.test.failure.ignore>true</maven.test.failure.ignore>
-		<spring.framework.version>3.0.2.RELEASE</spring.framework.version>
-		<spring.batch.version>2.1.1.RELEASE</spring.batch.version>
-		<spring.gemfire.version>1.0.0.M2-SNAPSHOT</spring.gemfire.version>
+		<spring.gemfire.version>1.0.0.RELEASE</spring.gemfire.version>
+		<spring.framework.version>3.0.5.RELEASE</spring.framework.version>
+		<spring.batch.version>2.1.6.RELEASE</spring.batch.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.8.1</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -103,11 +107,6 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.14</version>
 		</dependency>
-		<dependency>
-			<groupId>com.gemstone.gemfire</groupId>
-			<artifactId>gemfire</artifactId>
-			<version>6.0.1.A</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -121,14 +120,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<repositories>
-		<repository>
-			<id>gridgain</id>
-			<name>Gridgain Repository</name>
-			<url>http://www.gridgainsystems.com/maven2/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
 </project>

@@ -31,9 +31,10 @@ import com.gemstone.gemfire.cache.execute.FunctionService;
 import com.gemstone.gemfire.cache.execute.ResultCollector;
 
 /**
- * Main entry and configuration point for users of Gemfire as a partitioned step execution grid. Configure one of these
- * as the partition handler in a partitioned step and make sure that the Gemfire jars are on the classpath (and in the
- * distribution lib directory).
+ * Main entry and configuration point for users of Gemfire as a partitioned step
+ * execution grid. Configure one of these as the partition handler in a
+ * partitioned step and make sure that the Gemfire jars are on the classpath
+ * (and in the distribution lib directory).
  * 
  * @author Dave Syer
  * 
@@ -47,7 +48,8 @@ public class GemfirePartitionHandler implements PartitionHandler, InitializingBe
 	private Step step;
 
 	/**
-	 * Storage area and transport for step execution requests in the distributed system.
+	 * Storage area and transport for step execution requests in the distributed
+	 * system.
 	 * 
 	 * @param region a partitioned Region
 	 */
@@ -63,9 +65,11 @@ public class GemfirePartitionHandler implements PartitionHandler, InitializingBe
 	}
 
 	/**
-	 * The number of step executions to create per step execution. Can but does not have to be the same as the physical
-	 * grid size (number of nodes). Setting to a multiple of the physical grid size has some advantages regarding load
-	 * balancing if the partitioned step executions are not of uniform duration.
+	 * The number of step executions to create per step execution. Can but does
+	 * not have to be the same as the physical grid size (number of nodes).
+	 * Setting to a multiple of the physical grid size has some advantages
+	 * regarding load balancing if the partitioned step executions are not of
+	 * uniform duration.
 	 * 
 	 * @param gridSize the grid size to set
 	 */
@@ -82,9 +86,10 @@ public class GemfirePartitionHandler implements PartitionHandler, InitializingBe
 	}
 
 	/**
-	 * Handles the task generation, distribution and result collation for a partitioned step execution in a Gemfire
-	 * distributed system. For each partitioned execution puts an entry in the cache region provided, and removes all
-	 * entries after the step has finished.
+	 * Handles the task generation, distribution and result collation for a
+	 * partitioned step execution in a Gemfire distributed system. For each
+	 * partitioned execution puts an entry in the cache region provided, and
+	 * removes all entries after the step has finished.
 	 * 
 	 * @see PartitionHandler#handle(StepExecutionSplitter, StepExecution)
 	 */
@@ -104,13 +109,15 @@ public class GemfirePartitionHandler implements PartitionHandler, InitializingBe
 		try {
 
 			Execution execution = FunctionService.onRegion(region).withFilter(keys);
-			ResultCollector<? extends Serializable> collector = execution.execute(new GemfirePartitionFunction(step));
+			ResultCollector<? extends Serializable, ? extends Serializable> collector = execution
+					.execute(new GemfirePartitionFunction(step));
 
 			@SuppressWarnings("unchecked")
 			Collection<StepExecution> result = (Collection<StepExecution>) collector.getResult();
 			return result;
 
-		} finally {
+		}
+		finally {
 
 			for (String key : keys) {
 				region.remove(key);
