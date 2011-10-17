@@ -32,6 +32,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
+ * Simple test case demonstrating the gemfire partitioner. Should run out of the
+ * box on its own with an in memory database for the job repository. Change the
+ * context location to <code>launch-context.xml</code> to run in a gem cluster.
+ * 
  * @author Dave Syer
  * 
  */
@@ -41,8 +45,10 @@ public class ExampleJobConfigurationTests {
 
 	@Autowired
 	private JobLauncher jobLauncher;
+
 	@Autowired
 	private Job job;
+
 	@Autowired
 	@Qualifier("step")
 	private Step step;
@@ -55,10 +61,11 @@ public class ExampleJobConfigurationTests {
 
 	@Test
 	public void testLaunchJob() throws Exception {
-		JobExecution result = jobLauncher.run(job, new JobParametersBuilder().addString("run.id", "integration.test").toJobParameters());
+		JobExecution result = jobLauncher.run(job, new JobParametersBuilder().addString("run.id", "integration.test")
+				.toJobParameters());
 		assertNotNull(result);
 		assertEquals(BatchStatus.COMPLETED, result.getStatus());
-		assertEquals(3, result.getStepExecutions().size());
+		assertEquals(21, result.getStepExecutions().size());
 	}
 
 }

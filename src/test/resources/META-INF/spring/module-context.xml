@@ -17,7 +17,7 @@
 	<bean id="partitionHandler"
 		class="org.springframework.batch.core.partition.gemfire.GemfirePartitionHandler">
 		<property name="region" ref="region" />
-		<property name="gridSize" value="2" />
+		<property name="gridSize" value="20" />
 		<property name="step" ref="step" />
 	</bean>
 
@@ -33,7 +33,7 @@
 		scope="remote">
 		<property name="itemReader">
 			<bean
-				class="org.springframework.batch.core.partition.gemfire.ExampleItemReader" />
+				class="org.springframework.batch.core.partition.gemfire.ExampleItemReader" scope="step"/>
 		</property>
 		<property name="itemWriter">
 			<bean

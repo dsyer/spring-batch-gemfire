@@ -34,8 +34,15 @@ and then you will be able to use all the features provided by this project.
     </job>
     <bean id="partitionHandler" class="org.springframework.batch.core.partition.gemfire.GemfirePartitionHandler">
         <property name="region" ref="region" />
-        <property name="gridSize" value="2" />
+        <property name="gridSize" value="20" />
         <property name="step" ref="step" />
     </bean>
 
-See the unit test for more detail.   
+See the unit test and the source code of the handler for more detail.  The test is very minimal (it uses hard-coded in memory data, not distributed cache data), but it should scale well and Gemfire should take care of data locality if an item reader that reads from the cache is used.  The test is set up to run in-memory (not distributed) by default, so you can check that everything is working by simply running it out of teh box.  To run in a small cluster you can use the `RegionLauncher` provided in the same package to launch another gem node:
+
+1. Start an HSQL database server with connection url `jdbc:hsqldb:hsql://localhost:9005/samples`
+2. Run the `RegionLauncher` (it will fail if the database is not running)
+3. Change the test case so the context location is `launch-context.xml`
+4. Run the test
+
+You should see some steps being processed in the console output from the `RegionLauncher`, and you should see the test succeed.  The `RegionLauncher` log output will also show the partition executions being loaded and unloaded from the cluster through its cache listener.

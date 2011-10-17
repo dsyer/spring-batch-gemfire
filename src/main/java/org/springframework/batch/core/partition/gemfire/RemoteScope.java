@@ -158,6 +158,7 @@ public class RemoteScope implements Scope, BeanFactoryPostProcessor {
 			String names = Arrays.asList(registry.getBeanDefinitionNames()).toString();
 			logger.debug("Generating bean factory id from names: "+names);
 			id = UUID.nameUUIDFromBytes(names.getBytes()).toString();
+			logger.debug("Generated bean factory id: "+id);
 		}
 
 		Assert.state(beanFactory instanceof BeanDefinitionRegistry,
