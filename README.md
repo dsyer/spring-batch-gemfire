@@ -40,7 +40,8 @@ and then you will be able to use all the features provided by this project.
 
 See the unit test and the source code of the handler for more detail.  The test is very minimal (it uses hard-coded in memory data, not distributed cache data), but it should scale well and Gemfire should take care of data locality if an item reader that reads from the cache is used.  The test is set up to run in-memory (not distributed) by default, so you can check that everything is working by simply running it out of teh box.  To run in a small cluster you can use the `RegionLauncher` provided in the same package to launch another gem node:
 
-1. Start an HSQL database server with connection url `jdbc:hsqldb:hsql://localhost:9005/samples`
+1. Start an HSQL database server with connection url `jdbc:hsqldb:hsql://localhost:9005/samples`.  From Eclipse if you imported
+this project as a Maven project, you should be able to use the launcher in the top level directory - right click and run as...
 2. Run the `RegionLauncher` (it will fail if the database is not running)
 3. Change the test case so the context location is `launch-context.xml`
 4. Run the test
