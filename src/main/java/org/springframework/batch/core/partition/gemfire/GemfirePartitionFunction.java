@@ -32,8 +32,8 @@ import com.gemstone.gemfire.cache.execute.ResultSender;
 import com.gemstone.gemfire.cache.partition.PartitionRegionHelper;
 
 /**
- * A serializable function that can execute a step as part of a partition execution. Used internally by the
- * {@link GemfirePartitionHandler}.
+ * A serializable function that can execute a step as part of a partition
+ * execution. Used internally by the {@link GemfirePartitionHandler}.
  * 
  * @author Dave Syer
  * 
@@ -59,7 +59,8 @@ public class GemfirePartitionFunction extends FunctionAdapter {
 			count++;
 			if (count < executors.size()) {
 				sender.sendResult(execute(executor));
-			} else {
+			}
+			else {
 				sender.lastResult(execute(executor));
 			}
 		}
@@ -68,7 +69,8 @@ public class GemfirePartitionFunction extends FunctionAdapter {
 	private StepExecution execute(StepExecution stepExecution) {
 		try {
 			step.execute(stepExecution);
-		} catch (JobInterruptedException e) {
+		}
+		catch (JobInterruptedException e) {
 			stepExecution.getJobExecution().setStatus(BatchStatus.STOPPING);
 			throw new UnexpectedJobExecutionException("TODO: this should result in a stop", e);
 		}
@@ -85,7 +87,10 @@ public class GemfirePartitionFunction extends FunctionAdapter {
 
 		for (String key : keys) {
 			logger.debug("Extract:" + key);
-			result.add(data.get(key));
+			StepExecution execution = data.get(key);
+			if (execution != null) {
+				result.add(execution);
+			}
 		}
 
 		return result;
