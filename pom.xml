@@ -62,7 +62,7 @@
 	</profiles>
 	<properties>
 		<maven.test.failure.ignore>true</maven.test.failure.ignore>
-		<spring.gemfire.version>1.0.0.RELEASE</spring.gemfire.version>
+		<spring.gemfire.version>1.0.1.RELEASE</spring.gemfire.version>
 		<spring.framework.version>3.1.0.RELEASE</spring.framework.version>
 		<spring.batch.version>2.1.8.RELEASE</spring.batch.version>
 	</properties>
@@ -135,7 +135,7 @@
 			<groupId>hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
 			<version>1.8.0.7</version>
-			<scope>test</scope>
+			<scope>optional</scope>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
