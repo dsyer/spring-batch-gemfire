@@ -25,6 +25,17 @@
 						<enabled>true</enabled>
 					</releases>
 				</repository>
+				<repository>
+					<id>gemfire-release-repo</id>
+					<name>GemFire Release Repository</name>
+					<url>http://dist.gemstone.com/maven/release</url>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+				</repository>
 			</repositories>
 		</profile>
 		<profile>
@@ -62,7 +73,7 @@
 	</profiles>
 	<properties>
 		<maven.test.failure.ignore>true</maven.test.failure.ignore>
-		<spring.gemfire.version>1.0.1.RELEASE</spring.gemfire.version>
+		<spring.gemfire.version>1.1.0.RELEASE</spring.gemfire.version>
 		<spring.framework.version>3.1.0.RELEASE</spring.framework.version>
 		<spring.batch.version>2.1.8.RELEASE</spring.batch.version>
 	</properties>
@@ -115,8 +126,8 @@
 			<version>${spring.framework.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.data.gemfire</groupId>
-			<artifactId>spring-gemfire</artifactId>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-gemfire</artifactId>
 			<version>${spring.gemfire.version}</version>
 		</dependency>
 		<dependency>

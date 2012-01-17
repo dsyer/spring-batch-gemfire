@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:gemfire="http://www.springframework.org/schema/gemfire"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-2.1.xsd
-		http://www.springframework.org/schema/gemfire http://www.springframework.org/schema/gemfire/spring-gemfire.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:gemfire="http://www.springframework.org/schema/gemfire" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/gemfire http://www.springframework.org/schema/gemfire/spring-gemfire.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-2.1.xsd">
 
 	<job id="job" xmlns="http://www.springframework.org/schema/batch">
 		<step id="step-master">
@@ -13,7 +13,7 @@
 				partitioner="partitioner" />
 		</step>
 	</job>
-
+	
 	<bean id="partitionHandler"
 		class="org.springframework.batch.core.partition.gemfire.GemfirePartitionHandler">
 		<property name="region" ref="region" />
